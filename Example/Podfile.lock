@@ -1,0 +1,16 @@
+PODS:
+  - Yoga (0.1.0)
+
+DEPENDENCIES:
+  - Yoga (from `../`)
+
+EXTERNAL SOURCES:
+  Yoga:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Yoga: 05ff960ccdb3644c813ece6793257e128de64844
+
+PODFILE CHECKSUM: 92139ec1083c47bd760e5ae0e97535f5ea0f1d7c
+
+COCOAPODS: 1.8.4

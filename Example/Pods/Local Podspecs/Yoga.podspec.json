@@ -1,0 +1,22 @@
+{
+  "name": "Yoga",
+  "version": "0.1.0",
+  "summary": "A short description of Yoga.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/zhaoyangyang1/Yoga",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "zhaoyangyang1": "zhaoyangyang1@100tal.com"
+  },
+  "source": {
+    "git": "https://github.com/zhaoyangyang1/Yoga.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "Yoga/Classes/**/*"
+}
