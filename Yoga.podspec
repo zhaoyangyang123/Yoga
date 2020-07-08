@@ -3,10 +3,10 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-package = {'version'=>'1.14.0'}
+package = {'version'=>'0.62.2'}
 version = package['version']
 
-source = { :git => 'https://github.com/zhaoyangyang123/Yoga.git' }
+source = { :git => ENV['INSTALL_YOGA_FROM_LOCATION'] || 'https://github.com/facebook/react-native.git' }
 if version == '1000.0.0'
   # This is an unpublished version, use the latest commit hash of the react-native repo, which we’re presumably in.
   source[:commit] = `git rev-parse HEAD`.strip
@@ -16,7 +16,7 @@ end
 
 Pod::Spec.new do |spec|
   spec.name = 'Yoga'
-  spec.version = version
+  spec.version = '1.14.0'
   spec.license =  { :type => 'MIT' }
   spec.homepage = 'https://yogalayout.com'
   spec.documentation_url = 'https://yogalayout.com/docs/'
@@ -47,7 +47,7 @@ Pod::Spec.new do |spec|
 
   # Set this environment variable when *not* using the `:path` option to install the pod.
   # E.g. when publishing this spec to a spec repo.
-  source_files = 'yoga/**/*.{h,cpp}'
+  source_files = 'yoga/**/*.{cpp,h}'
   source_files = File.join('ReactCommon/yoga', source_files) if ENV['INSTALL_YOGA_WITHOUT_PATH_OPTION']
   spec.source_files = source_files
 
@@ -55,3 +55,4 @@ Pod::Spec.new do |spec|
   header_files = File.join('ReactCommon/yoga', header_files) if ENV['INSTALL_YOGA_WITHOUT_PATH_OPTION']
   spec.public_header_files = header_files
 end
+
