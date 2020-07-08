@@ -3,7 +3,7 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-package = {'version'=>'0.62.2'}
+package = {'version'=>'1.14.0'}
 version = package['version']
 
 source = { :git => 'https://github.com/zhaoyangyang123/Yoga.git' }
@@ -16,7 +16,7 @@ end
 
 Pod::Spec.new do |spec|
   spec.name = 'Yoga'
-  spec.version = '1.14.0'
+  spec.version = version
   spec.license =  { :type => 'MIT' }
   spec.homepage = 'https://yogalayout.com'
   spec.documentation_url = 'https://yogalayout.com/docs/'
