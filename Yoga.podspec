@@ -53,5 +53,5 @@ Pod::Spec.new do |spec|
 
   #header_files = 'yoga/{Yoga,YGEnums,YGMacros,YGValue}.h'
   #header_files = File.join('ReactCommon/yoga', header_files) if ENV['INSTALL_YOGA_WITHOUT_PATH_OPTION']
-  spec.public_header_files = header_files
+  #spec.public_header_files = header_files
 end
