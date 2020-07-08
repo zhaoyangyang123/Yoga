@@ -1,42 +1,57 @@
+# Copyright (c) Facebook, Inc. and its affiliates.
 #
-# Be sure to run `pod lib lint Yoga.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
-#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
 
-Pod::Spec.new do |s|
-  s.name             = 'Yoga'
-  s.version          = '1.14.0'
-  s.summary          = 'Yoga私有库'
+package = {'version'=>'0.62.2'}
+version = package['version']
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+source = { :git => ENV['INSTALL_YOGA_FROM_LOCATION'] || 'https://github.com/facebook/react-native.git' }
+if version == '1000.0.0'
+  # This is an unpublished version, use the latest commit hash of the react-native repo, which we’re presumably in.
+  source[:commit] = `git rev-parse HEAD`.strip
+else
+  source[:tag] = "v#{version}"
+end
 
-  s.description      = <<-DESC
-                       YogaPrivate
-                       DESC
+Pod::Spec.new do |spec|
+  spec.name = 'Yoga'
+  spec.version = '1.14.0'
+  spec.license =  { :type => 'MIT' }
+  spec.homepage = 'https://yogalayout.com'
+  spec.documentation_url = 'https://yogalayout.com/docs/'
 
-  s.homepage         = 'https://github.com/zhaoyangyang123/Yoga.git'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'zhaoyangyang1' => 'zhaoyangyang1@100tal.com' }
-  s.source           = { :git => 'https://github.com/zhaoyangyang123/Yoga.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  spec.summary = 'Yoga is a cross-platform layout engine which implements Flexbox.'
+  spec.description = 'Yoga is a cross-platform layout engine enabling maximum collaboration within your team by implementing an API many designers are familiar with, and opening it up to developers across different platforms.'
 
-  s.ios.deployment_target = '8.0'
+  spec.authors = 'Facebook'
+  spec.source = source
 
-  s.source_files = 'Yoga/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'Yoga' => ['Yoga/Assets/*.png']
-  # }
+  spec.module_name = 'yoga'
+  spec.header_dir = 'yoga'
+  spec.requires_arc = false
+  spec.pod_target_xcconfig = {
+      'DEFINES_MODULE' => 'YES'
+  }
+  spec.compiler_flags = [
+      '-fno-omit-frame-pointer',
+      '-fexceptions',
+      '-Wall',
+      '-Werror',
+      '-std=c++1y',
+      '-fPIC'
+  ]
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  # Pinning to the same version as React.podspec.
+  spec.platforms = { :ios => "9.0", :tvos => "9.2" }
+
+  # Set this environment variable when *not* using the `:path` option to install the pod.
+  # E.g. when publishing this spec to a spec repo.
+  source_files = 'yoga/**/*.{cpp,h}'
+  source_files = File.join('ReactCommon/yoga', source_files) if ENV['INSTALL_YOGA_WITHOUT_PATH_OPTION']
+  spec.source_files = source_files
+
+  header_files = 'yoga/{Yoga,YGEnums,YGMacros,YGValue}.h'
+  header_files = File.join('ReactCommon/yoga', header_files) if ENV['INSTALL_YOGA_WITHOUT_PATH_OPTION']
+  spec.public_header_files = header_files
 end
